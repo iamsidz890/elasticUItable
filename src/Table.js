@@ -24,35 +24,67 @@ function Table() {
 				}
 			);
 	}, []);
-	console.log(store);
-	const machines = store.map((machine) => {
-		// console.log(machine);
-		return machine[0];
-	});
+	// console.log(store);
+	// const machines = store.map((machine) => {
+	// 	// console.log(machine);
+	// 	return machine[0];
+	// });
 	// console.log(mac);
 	// console.log(machines);
+	const arr = store.map((item) => {
+		return {
+			MachineName: item[0],
+			FirstNumber: item[1],
+			Number: item[2],
+			Problem: item[3],
+			Plant: item[4],
+			Type: item[5],
+			Location: item[6],
+		};
+	});
+	const passArr = [...arr];
+	console.log(passArr);
 
 	const columns = [
 		{
+			field: "MachineName",
 			name: "Machine Name",
+			render: (MachineName) => <span>{MachineName}</span>,
+
+			header: false,
+			truncateText: false,
+			enlarge: true,
+			fullWidth: true,
 		},
 		{
+			field: "FirstNumber",
 			name: "First No.",
+			render: (FirstNumber) => <span>{FirstNumber} </span>,
 		},
 		{
+			field: "Number",
 			name: "Number",
+			render: (Number) => <span>{Number} </span>,
 		},
 		{
-			name: "Plant",
-		},
-		{
-			name: "Type",
-		},
-		{
-			name: "Loc",
-		},
-		{
+			field: "Problem",
 			name: "Problem",
+			render: (Problem) => <span>{Problem} </span>,
+		},
+		{
+			field: "Plant",
+			name: "Plant",
+			render: (Plant) => <span>{Plant} </span>,
+		},
+		{
+			field: "Type",
+			name: "Type",
+			render: (Type) => <span>{Type} </span>,
+		},
+		{
+			field: "Location",
+			name: "Location",
+			render: (Location) => <span>{Location} </span>,
 		},
 	];
 
@@ -65,7 +97,13 @@ function Table() {
 			</div>
 		);
 	} else {
-		return <EuiBasicTable items={store} columns={columns} />;
+		return (
+			<EuiBasicTable
+				rowHeader='MachineName'
+				items={passArr}
+				columns={columns}
+			/>
+		);
 	}
 }
 export default Table;
