@@ -1,5 +1,6 @@
 import "./App.css";
 import Table from "./Table.js";
+// import Tables from "./TableC";
 function App() {
 	return (
 		<div className='App'>

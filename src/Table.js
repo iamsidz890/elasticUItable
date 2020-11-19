@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Loading from "./Loading.js";
+import { EuiBasicTable, EuiLink, EuiHealth } from "@elastic/eui";
 
 function Table() {
 	const [error, setError] = useState(null);
 	const [isLoaded, setIsLoaded] = useState(false);
-	const [items, setItems] = useState([]);
+	const [store, setStore] = useState([]);
 
 	useEffect(() => {
 		fetch(
@@ -14,7 +15,7 @@ function Table() {
 			.then(
 				(result) => {
 					setIsLoaded(true);
-					setItems(result);
+					setStore(result);
 				},
 
 				(error) => {
@@ -23,7 +24,37 @@ function Table() {
 				}
 			);
 	}, []);
-	console.log(items);
+	console.log(store);
+	const machines = store.map((machine) => {
+		// console.log(machine);
+		return machine[0];
+	});
+	// console.log(mac);
+	// console.log(machines);
+
+	const columns = [
+		{
+			name: "Machine Name",
+		},
+		{
+			name: "First No.",
+		},
+		{
+			name: "Number",
+		},
+		{
+			name: "Plant",
+		},
+		{
+			name: "Type",
+		},
+		{
+			name: "Loc",
+		},
+		{
+			name: "Problem",
+		},
+	];
 
 	if (error) {
 		return <div>Error: {error.message}</div>;
@@ -34,7 +65,7 @@ function Table() {
 			</div>
 		);
 	} else {
-		return <ul>{items[0]}</ul>;
+		return <EuiBasicTable items={store} columns={columns} />;
 	}
 }
 export default Table;
