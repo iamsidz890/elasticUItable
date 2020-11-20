@@ -1,6 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Loading from "./Loading.js";
-import { EuiBasicTable } from "@elastic/eui";
+import {
+	EuiBasicTable,
+	EuiFlyout,
+	EuiFlyoutHeader,
+	EuiFlyoutBody,
+	EuiButton,
+	EuiText,
+	EuiTitle,
+} from "@elastic/eui";
+// import Flyout from "./Flyout.js";
 
 function Table() {
 	const [error, setError] = useState(null);
@@ -36,6 +45,8 @@ function Table() {
 			Location: item[6],
 		};
 	});
+	console.log("Array", arr);
+
 	const passArr = [...arr];
 	console.log(passArr);
 
@@ -43,12 +54,14 @@ function Table() {
 		{
 			field: "MachineName",
 			name: "Machine Name",
-			render: (MachineName) => <p>{MachineName}</p>,
+			render: (MachineName) => (
+				<EuiButton onClick={showFlyout}>{MachineName}</EuiButton>
+			),
 
-			header: false,
-			truncateText: false,
-			enlarge: true,
-			fullWidth: true,
+			// header: false,
+			// truncateText: false,
+			// enlarge: true,
+			// fullWidth: true,
 		},
 		{
 			field: "FirstNumber",
@@ -58,29 +71,57 @@ function Table() {
 		{
 			field: "Number",
 			name: "Number",
-			render: (Number) => <p>{Number} </p>,
+			// render: (Number) => <strong>{Number} </strong>,
 		},
 		{
 			field: "Problem",
 			name: "Problem",
-			render: (Problem) => <p>{Problem} </p>,
+			// render: (Problem) => <p>{Problem} </p>,
 		},
 		{
 			field: "Plant",
 			name: "Plant",
-			render: (Plant) => <p>{Plant} </p>,
+			// render: (Plant) => <p>{Plant} </p>,
 		},
 		{
 			field: "Type",
 			name: "Type",
-			render: (Type) => <p>{Type} </p>,
+			// render: (Type) => <p>{Type} </p>,
 		},
 		{
 			field: "Location",
 			name: "Location",
-			render: (Location) => <p>{Location} </p>,
+			// render: (Location) => <p>{Location} </p>,
 		},
 	];
+
+	const [isFlyoutVisible, setIsFlyoutVisible] = useState(false);
+
+	const closeFlyout = () => setIsFlyoutVisible(false);
+
+	const showFlyout = () => setIsFlyoutVisible(true);
+
+	let flyout;
+	if (isFlyoutVisible) {
+		flyout = (
+			<EuiFlyout
+				ownFocus
+				onClose={closeFlyout}
+				size='l'
+				aria-labelledby='flyoutLargeTitle'>
+				<EuiFlyoutHeader hasBorder>
+					<EuiTitle size='m'>
+						<h2 id='flyoutLargeTitle'>A large flyout</h2>
+					</EuiTitle>
+				</EuiFlyoutHeader>
+				<EuiFlyoutBody>
+					<EuiText>
+						<p>The large flyout is very wide.</p>
+					</EuiText>
+				</EuiFlyoutBody>
+			</EuiFlyout>
+		);
+	}
 
 	if (error) {
 		return <div>Error: {error.message}</div>;
@@ -92,11 +133,11 @@ function Table() {
 		);
 	} else {
 		return (
-			<EuiBasicTable
-				rowHeader='MachineName'
-				items={passArr}
-				columns={columns}
-			/>
+			<>
+				<EuiBasicTable rowHeader='MachineName' items={arr} columns={columns} />
+
+				{flyout}
+			</>
 		);
 	}
 }
