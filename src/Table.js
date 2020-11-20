@@ -57,11 +57,6 @@ function Table() {
 			render: (MachineName) => (
 				<EuiButton onClick={showFlyout}>{MachineName}</EuiButton>
 			),
-
-			// header: false,
-			// truncateText: false,
-			// enlarge: true,
-			// fullWidth: true,
 		},
 		{
 			field: "FirstNumber",
