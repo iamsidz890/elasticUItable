@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Loading from "./Loading.js";
-import { EuiBasicTable, EuiLink, EuiHealth } from "@elastic/eui";
+import { EuiBasicTable } from "@elastic/eui";
 
 function Table() {
 	const [error, setError] = useState(null);
@@ -24,13 +24,7 @@ function Table() {
 				}
 			);
 	}, []);
-	// console.log(store);
-	// const machines = store.map((machine) => {
-	// 	// console.log(machine);
-	// 	return machine[0];
-	// });
-	// console.log(mac);
-	// console.log(machines);
+
 	const arr = store.map((item) => {
 		return {
 			MachineName: item[0],
@@ -49,7 +43,7 @@ function Table() {
 		{
 			field: "MachineName",
 			name: "Machine Name",
-			render: (MachineName) => <span>{MachineName}</span>,
+			render: (MachineName) => <p>{MachineName}</p>,
 
 			header: false,
 			truncateText: false,
@@ -59,32 +53,32 @@ function Table() {
 		{
 			field: "FirstNumber",
 			name: "First No.",
-			render: (FirstNumber) => <span>{FirstNumber} </span>,
+			render: (FirstNumber) => <p>{FirstNumber} </p>,
 		},
 		{
 			field: "Number",
 			name: "Number",
-			render: (Number) => <span>{Number} </span>,
+			render: (Number) => <p>{Number} </p>,
 		},
 		{
 			field: "Problem",
 			name: "Problem",
-			render: (Problem) => <span>{Problem} </span>,
+			render: (Problem) => <p>{Problem} </p>,
 		},
 		{
 			field: "Plant",
 			name: "Plant",
-			render: (Plant) => <span>{Plant} </span>,
+			render: (Plant) => <p>{Plant} </p>,
 		},
 		{
 			field: "Type",
 			name: "Type",
-			render: (Type) => <span>{Type} </span>,
+			render: (Type) => <p>{Type} </p>,
 		},
 		{
 			field: "Location",
 			name: "Location",
-			render: (Location) => <span>{Location} </span>,
+			render: (Location) => <p>{Location} </p>,
 		},
 	];
 
